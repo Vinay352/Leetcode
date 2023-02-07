@@ -44,6 +44,49 @@ public class ContainsDuplicates {
         int[] left = 
     }
 
+    public static boolean binarySearchModified(int[] nums){
+        return _binarySearchModified(nums, 0, nums.length - 1, 0, nums.length - 1) ;
+    }
+
+    private static boolean _binarySearchModified(int[] nums, int left, int right, int min, int max) {
+
+        boolean answer = false;
+        if(right - left + 1 <= 2){
+            if(left - 1 >= min){
+                if(nums[left] == nums[left - 1]){
+                    return true;
+                }
+            }
+            if(left + 1 <= max){
+                if(nums[left] == nums[left + 1]){
+                    return true;
+                }
+            }
+            if(right - 1 >= min){
+                if(nums[right] == nums[right - 1]){
+                    return true;
+                }
+            }
+            if(right + 1 <= max){
+                if(nums[right] == nums[right + 1]){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        int mid = left + (right - left)/2;
+        if(nums[mid] == nums[mid - 1] || nums[mid] == nums[mid + 1]){
+            return true;
+        }
+
+        boolean leftBool = _binarySearchModified(nums, left, mid, min, max);
+        boolean rightBool = _binarySearchModified(nums, mid + 1, right, min, max);
+
+        answer = leftBool || rightBool;
+        return answer;
+    }
+
     private static boolean sortAndCheckAdjacent(int[] nums) {
         int[] arr = mergeSort(nums, 0, nums.length - 1);
     }
