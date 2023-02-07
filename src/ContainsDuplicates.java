@@ -37,11 +37,70 @@ public class ContainsDuplicates {
 
         boolean approach2 = sortAndCheckAdjacent(nums); // O(nlogn) + O(n)
 
+        boolean approach3 = sortandCheckViaModifiedBinary(nums);
+
     }
 
-    public static int[] mergeSort(int[] nums, int left, int right){
+    private static boolean sortandCheckViaModifiedBinary(int[] nums) {
+        mergeSort(nums, 0, nums.length - 1);
+        return binarySearchModified(nums);
+    }
+
+    public static void mergeSort(int[] nums, int left, int right){
+        if(left >= right)
+            return ;
+
         int mid = left + (right - left)/2;
-        int[] left = 
+
+        mergeSort(nums, left, mid);
+        mergeSort(nums, mid + 1, right);
+
+        mergeFunction(nums, left, right);
+    }
+
+    private static void mergeFunction(int[] nums, int left, int right) {
+
+        int mid = left + (right - left)/2;
+
+        int[] leftArr = new int[mid - left + 1];
+        int[] rightArr = new int[right - mid];
+
+        for(int i = 0; i < mid - left + 1; i++){
+            leftArr[i] = nums[left + i];
+        }
+        for(int i = 0; i < right - mid; i++){
+            rightArr[i] = nums[mid + 1 + i];
+        }
+
+        int i = 0, j = 0;
+        int k = 0;
+        while(i < mid - left + 1 && j < right - mid){
+
+            if(leftArr[i] <= rightArr[j]){
+                nums[k] = leftArr[i];
+                k++;
+                i++;
+            }
+            else if(leftArr[i] > rightArr[j]){
+                nums[k] = rightArr[j];
+                k++;
+                j++;
+            }
+
+        }
+
+        while(i < mid - left + 1){
+            nums[k] = leftArr[i];
+            k++;
+            i++;
+        }
+
+        while(j < right - mid){
+            nums[k] = rightArr[j];
+            k++;
+            j++;
+        }
+
     }
 
     public static boolean binarySearchModified(int[] nums){
@@ -88,7 +147,14 @@ public class ContainsDuplicates {
     }
 
     private static boolean sortAndCheckAdjacent(int[] nums) {
-        int[] arr = mergeSort(nums, 0, nums.length - 1);
+        mergeSort(nums, 0, nums.length - 1);
+
+        for(int i = 0; i < nums.length - 1; i++){
+            if(nums[i] == nums[i + 1]){
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean n2Approach(int[] nums) {
