@@ -1,4 +1,3 @@
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,43 +6,54 @@ public class ContainsDuplicates {
 
     public static void main(String[] args) throws IOException {
         boolean flag = true;
-        while(flag){
-            try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            while(flag){
                 String str = br.readLine();
-                if(str == ""){
-                    break;
+                if (str == "") {
+                    flag = false;
+//                    break;
                 }
                 String[] strArray = str.split(" ");
-                int [] nums = new int[strArray.length];
+                int[] nums = new int[strArray.length];
 
-                for(int i = 0; i < nums.length; i++){
-                    nums[i] = Integer.parseInt( strArray[i] );
+                for (int i = 0; i < nums.length; i++) {
+                    nums[i] = Integer.parseInt(strArray[i]);
                 }
 
                 boolean answer = containsDuplicate(nums);
-
-
-
-
-            }catch (Exception e){
-                System.out.println("Exception");
+                System.out.println(answer);
             }
+
+        } catch (Exception e) {
+            System.out.println("Exception");
         }
     }
 
     public static boolean containsDuplicate(int[] nums) {
 
         boolean approach1 = n2Approach(nums);
+        System.out.println(approach1);
 
         boolean approach2 = sortAndCheckAdjacent(nums); // O(nlogn) + O(n)
+        System.out.println(approach2);
 
-        boolean approach3 = sortandCheckViaModifiedBinary(nums);
+        boolean approach3 = sortandCheckViaModifiedBinary(nums); // O(nlogn) + O(logn)
+        System.out.println(approach3);
 
+        return approach1 && approach2 && approach3;
     }
 
     private static boolean sortandCheckViaModifiedBinary(int[] nums) {
         mergeSort(nums, 0, nums.length - 1);
+        printArray(nums);
         return binarySearchModified(nums);
+    }
+
+    private static void printArray(int[] nums) {
+        for(int i = 0; i < nums.length; i++){
+            System.out.print(nums[i] + " ");
+        }
+        System.out.println();
     }
 
     public static void mergeSort(int[] nums, int left, int right){
