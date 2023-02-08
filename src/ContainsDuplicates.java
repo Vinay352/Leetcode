@@ -32,20 +32,20 @@ public class ContainsDuplicates {
     public static boolean containsDuplicate(int[] nums) {
 
         boolean approach1 = n2Approach(nums);
-        System.out.println(approach1);
+//        System.out.println(approach1);
 
         boolean approach2 = sortAndCheckAdjacent(nums); // O(nlogn) + O(n)
-        System.out.println(approach2);
+//        System.out.println(approach2);
 
         boolean approach3 = sortandCheckViaModifiedBinary(nums); // O(nlogn) + O(logn)
-        System.out.println(approach3);
+//        System.out.println(approach3);
 
         return approach1 && approach2 && approach3;
     }
 
     private static boolean sortandCheckViaModifiedBinary(int[] nums) {
         mergeSort(nums, 0, nums.length - 1);
-        printArray(nums);
+//        printArray(nums);
         return binarySearchModified(nums);
     }
 
@@ -83,7 +83,7 @@ public class ContainsDuplicates {
         }
 
         int i = 0, j = 0;
-        int k = 0;
+        int k = left;
         while(i < mid - left + 1 && j < right - mid){
 
             if(leftArr[i] <= rightArr[j]){
