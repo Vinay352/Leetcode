@@ -73,48 +73,23 @@ public class ReverseLinkedList {
 //        ListNode3 iterativeReverse = reverseIteratively(head);
 //        return iterativeReverse;
 
-        if(head == null){
-            return null;
-        }
-
-        ListNode3 previous = head;
-        ListNode3 current = head.next;
-        ListNode3 next = current.next;
-        previous.next = null;
-
-        if(head.next == null){
-            return head;
-        }
-
 //        ListNode3 recursiveReverse = reverseRecursively(previous, current, next);
-        ListNode3 recursiveReverse = reverseRecursively(previous);
-        return recursiveReverse;
+        ListNode3 newHead = reverseRecursively(null , head);
+        return head;
     }
 
-    private static ListNode3 reverseRecursively(ListNode3 head) {
-        if(head.next == null){
-            return head;
+    private static ListNode3 reverseRecursively(ListNode3 previous, ListNode3 current) {
+
+        if(current == null){
+            return previous;
         }
-        ListNode3 last = reverseRecursively(head.next);
+        ListNode3 nextNode = current.next;
+        current.next = previous;
+        previous = current;
+        current = nextNode;
 
-        return reverse;
+        return reverseRecursively(previous, current);
     }
-
-//    private static ListNode3 reverseRecursively(ListNode3 previous, ListNode3 current, ListNode3 next) {
-////        if(next == null){
-////            current.next = previous;
-////            return current;
-////        }
-////        current.next = previous;
-////        ListNode3 temp = next.next;
-////
-////        previous = current;
-////        current = next;
-////
-////        next = temp;
-////
-////        return current.next = reverseRecursively(previous, current, next);
-//    }
 
     private static ListNode3 reverseIteratively(ListNode3 head) {
         if(head == null){
