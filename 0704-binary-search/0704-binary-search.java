@@ -1,46 +1,24 @@
 class Solution {
     public int search(int[] nums, int target) {
-        return binarySearchImplementaion(nums, target, 0, nums.length - 1);
+        return binarySearchUtil(nums, target, 0, nums.length);
     }
     
-    private int binarySearchImplementaion(int[] nums, int target, int start, int end) {
+    private int binarySearchUtil(int[] arr, int target, int start, int end) {
 
-        int middleIndex = start + (int) Math.floor((end - start) / 2);
-        int middleValue = nums[middleIndex];
-
-        if(middleValue == target){
-            return middleIndex;
+        if(start >= end){
+            return -1;
         }
 
-        if(start == end){
-            if(middleValue == target){
-                return middleIndex;
-            }
-            else{
-                return -1;
-            }
-        }
+        int middle = (int)((start + end) / 2);
 
-        if(start == end - 1){
-            if(nums[start] == target){
-                return start;
-            }
-            else if(nums[end] == target){
-                return end;
-            }
-            else{
-                return -1;
-            }
+        if(target == arr[middle]){
+            return middle;
         }
-
-        if(middleValue < target){
-            // search in right half
-            return binarySearchImplementaion(nums, target, middleIndex + 1, end);
+        else if(target < arr[middle]){
+            return binarySearchUtil(arr, target, start, middle);
         }
-
-        if(middleValue > target){
-            // search in left half
-            return binarySearchImplementaion(nums, target, start, middleIndex - 1);
+        else if(target > arr[middle]){
+            return binarySearchUtil(arr, target, middle + 1, end);
         }
 
         return -1;
