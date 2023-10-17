@@ -14,17 +14,17 @@ class Solution {
     private static char binarySearchCharUtil(char[] letters, char target, int left, int right) {
 
 
-        while(left < right - 1){
+        while(left <= right){
             int middle = left + (int)((right - left) / 2);
             if(letters[middle] <= target){
-                left = middle;
+                left = middle + 1;
             }
             else{
-                right = middle;
+                right = middle - 1;
             }
         }
 
-        return letters[right];
+        return letters[right + 1];
 
     }
 }
