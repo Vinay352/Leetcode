@@ -1,22 +1,22 @@
 class Solution {
     public int climbStairs(int n) {
-        int previousToPrevious = 1;
-        int immediatePrevious = 2;
-
-        if(n == 1){
-            return previousToPrevious;
+        // intialize the array for storing no. of way to climb n stairs
+        int[] dpCountWaysToClimbStairs = new int[n + 1];
+        
+        // define the base cases
+        dpCountWaysToClimbStairs[0] = 0; // 0 ways to climb 0 stairs
+        dpCountWaysToClimbStairs[1] = 1; // 1 way to climb 1 stair
+        
+        if(n > 1){
+            dpCountWaysToClimbStairs[2] = 2; // 2 ways to climb 2 stairs: (1+1), 2
         }
-        if(n == 2){
-            return immediatePrevious;
-        }
-
-        int answer = 0;
+    
+        // loop to calculate ways to climb for every stair until nth stair
         for(int i = 3; i <= n; i++){
-            answer = immediatePrevious + previousToPrevious;
-            previousToPrevious = immediatePrevious;
-            immediatePrevious = answer;
+            // to climb ith stair = ways to climb (i - 2)th stair + ways to climb (i - 1)th stair
+            dpCountWaysToClimbStairs[i] = dpCountWaysToClimbStairs[i - 2] + dpCountWaysToClimbStairs[i - 1];
         }
 
-        return answer;
+        return dpCountWaysToClimbStairs[n]; // the final position is the answer
     }
 }
