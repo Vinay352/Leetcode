@@ -7,7 +7,7 @@ class Solution {
         dpCountWaysToClimbStairs[0] = 0; // 0 ways to climb 0 stairs
         dpCountWaysToClimbStairs[1] = 1; // 1 way to climb 1 stair
         
-        if(n > 1){
+        if(n > 1){ // if we need to calculate for more than 1 stairs
             dpCountWaysToClimbStairs[2] = 2; // 2 ways to climb 2 stairs: (1+1), 2
         }
     
