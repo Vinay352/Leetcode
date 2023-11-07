@@ -9,6 +9,7 @@
  * }
  */
 class Solution {
+    
     // ITERATIVE METHOD
 //     public ListNode reverseList(ListNode head) {
 //         if(head == null){
@@ -36,7 +37,8 @@ class Solution {
 //         return temp;
 //     }
     
-    // RECURSION TYPE 1
+    
+    // RECURSION
     public ListNode reverseList(ListNode head){
         if(head == null){
             return null;
@@ -50,7 +52,7 @@ class Solution {
         
         return reverse_ll(cur, nextN, nextN.next);
     }
-    // utility function
+    // utility function for RECURSION
     public ListNode reverse_ll(ListNode cur, ListNode nextN, ListNode nextNN){
         if(nextN == null){
             return cur;
@@ -62,4 +64,6 @@ class Solution {
         nextN = nextNN;
         return reverse_ll(cur, nextN, nextNN);
     }
+    
+    
 }
