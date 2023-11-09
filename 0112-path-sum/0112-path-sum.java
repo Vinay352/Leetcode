@@ -19,30 +19,39 @@ class Solution {
             return false;
         }
 
-        return hasPathSumRecursion2(tree, targetSum);
+        // stack to keep track of incoming nodes of the tree
+        // stack is used to imitate traverse the tree depth wise
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(tree);
+
+        // track visited nodes
+        Set<TreeNode> visitedSet = new HashSet<TreeNode>();
+
+        // traverse the tree once while appending every node in the the tree
+        while(!stack.isEmpty()){
+            int notALeaf = 0; // track whether current popNode is leaf or not
+            TreeNode popNode = stack.pop();
+
+            if(popNode.right != null){ // insert right node in the queue
+                popNode.right.val += popNode.val; // update right child value
+                stack.add(popNode.right);
+                notALeaf = 1;
+            }
+            if(popNode.left != null){ // insert left node in the queue
+                popNode.left.val += popNode.val; // update left child value
+                stack.add(popNode.left);
+                notALeaf = 1;
+            }
+
+            if(notALeaf == 0){ // if we've encountered a leaf node
+                if(popNode.val == targetSum){ // check for a match
+                    return true;
+                }
+            }
+            visitedSet.add(popNode);
+        }
+
+        return false;
     }
 
-    // recursion 2
-    public boolean hasPathSumRecursion2(TreeNode tree, int targetSum) {
-        if(tree.left == null && tree.right == null){
-            return tree.val == targetSum;
-        }
-
-        boolean leftSum = false;
-        //recurse in left depth
-        if(tree.left != null){
-            tree.left.val += tree.val;
-            leftSum = hasPathSumRecursion2(tree.left, targetSum);
-        }
-
-        boolean rightSum = false;
-        //recurse in right depth
-        if(tree.right != null){
-            tree.right.val += tree.val;
-            rightSum = hasPathSumRecursion2(tree.right, targetSum);
-        }
-
-        return leftSum || rightSum;
-
-    }
 }
