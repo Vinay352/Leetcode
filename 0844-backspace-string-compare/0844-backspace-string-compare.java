@@ -43,7 +43,7 @@ class Solution {
             if( (firstPointer >= 0 && secondPointer >= 0) && (s.charAt(firstPointer) != t.charAt(secondPointer)) ){
                 return false;
             }
-            if( (firstPointer >= 0) != (secondPointer >= 0)){
+            if( (firstPointer < 0 && secondPointer >= 0) || (firstPointer >= 0 && secondPointer < 0) ){
                 return false;
             }
             firstPointer--;
