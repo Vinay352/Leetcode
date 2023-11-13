@@ -1,5 +1,6 @@
 class Solution {
     // Moore's voting algorithm
+    // ONLY works for finding a CANDIDATE > (n // 2) times
     public int majorityElement(int[] nums) {
         int count = 0; // count of the candidate which occurs moer than floor(n / 2) times
         int candidate = nums[0]; // the candidate with the max count as compared to others or count > floor(n / 2)
