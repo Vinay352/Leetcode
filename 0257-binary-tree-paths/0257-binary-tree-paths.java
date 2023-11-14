@@ -29,7 +29,11 @@ class Solution {
     }
 
     public List<String> binaryTreePathsUtil(TreeNode root, String path, List<String> ans) {
-        
+        //        if(root == null){
+//            path = path + "";
+//            return ans;
+//        }
+
         if(root.left == null && root.right == null){
             path = path + "->" + root.val;
             ans.add(path);
