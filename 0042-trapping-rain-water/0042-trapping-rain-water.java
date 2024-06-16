@@ -11,7 +11,10 @@ class Solution {
     }
     int trappedWater = 0;
     for(int i = 0; i < n; i++) {
-        trappedWater += Math.min(left[i], right[i]) - height[i]; // Subtract the height of the bar
+        int minBoundary = Math.min(left[i], right[i]);
+        if (height[i] < minBoundary) {
+            trappedWater += minBoundary - height[i];
+        }
     }
     return trappedWater;
     }
